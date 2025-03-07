@@ -54,6 +54,7 @@ class NativeAudioSource
 		this.parent = parent;
 
 		position = new Vector4();
+		AL.deleteSource(handle);
 	}
 
 	public function dispose():Void
@@ -62,7 +63,6 @@ class NativeAudioSource
 		{
 			stop();
 			AL.sourcei(handle, AL.BUFFER, null);
-			AL.deleteSource(handle);
 			if (buffers != null)
 			{
 				for (buffer in buffers)
@@ -208,11 +208,11 @@ class NativeAudioSource
 		var buffer = new UInt8Array(length);
 		var read = 0, total = 0, readMax;
 
-		for (i in 0...STREAM_NUM_BUFFERS-1)
+		for (i in 0...STREAM_NUM_BUFFERS - 1)
 		{
 			bufferTimeBlocks[i] = bufferTimeBlocks[i + 1];
 		}
-		bufferTimeBlocks[STREAM_NUM_BUFFERS-1] = vorbisFile.timeTell();
+		bufferTimeBlocks[STREAM_NUM_BUFFERS - 1] = vorbisFile.timeTell();
 
 		while (total < length)
 		{
@@ -364,19 +364,19 @@ class NativeAudioSource
 		{
 			if (stream)
 			{
-				var time = (Std.int(bufferTimeBlocks[0] * 1000) + Std.int(AL.getSourcef(handle, AL.SEC_OFFSET) * 1000)) - parent.offset;
+				var time = (bufferTimeBlocks[0] * 1000 + AL.getSourcef(handle, AL.SEC_OFFSET) * 1000) - parent.offset;
 				if (time < 0) return 0;
 				return time;
 			}
 			else
 			{
-				var offset:Int = AL.getSourcei(handle, AL.BYTE_OFFSET);
-				var ratio = (offset / dataLength);
-				var totalSeconds = samples / parent.buffer.sampleRate;
-
-				var time = totalSeconds * ratio * 1000 - parent.offset;
+				// var offset = AL.getSourcei(handle, AL.BYTE_OFFSET);
+				// var ratio = (offset / dataLength);
+				// var totalSeconds = samples / parent.buffer.sampleRate;
 
 				// var time = Std.int (AL.getSourcef (handle, AL.SEC_OFFSET) * 1000) - parent.offset;
+				// var time = totalSeconds * ratio * 1000 - parent.offset;
+				var time = AL.getSourcef(handle, AL.SEC_OFFSET) * 1000.0 - parent.offset;
 				if (time < 0) return 0;
 				return time;
 			}
@@ -418,7 +418,7 @@ class NativeAudioSource
 				else if (secondOffset > totalSeconds) secondOffset = totalSeconds;
 
 				var ratio = (secondOffset / totalSeconds);
-				var totalOffset = Std.int(dataLength * ratio);
+				var totalOffset = dataLength * ratio;
 
 				AL.sourcei(handle, AL.BYTE_OFFSET, totalOffset);
 				if (playing) AL.sourcePlay(handle);

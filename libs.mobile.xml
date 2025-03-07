@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <libraries>
 	<!-- OpenFL & Lime (Required for Flixel) -->
-	<lib name="openfl" url="https://github.com/MobilePorting/openfl" ref="9.2.2" />
+	<git name="openfl" url="https://github.com/MobilePorting/openfl" ref="9.2.2" />
 	<git name="lime" url="https://github.com/MobilePorting/lime" />
 
 	<!-- Flixel -->
@@ -11,7 +11,7 @@
 	<!-- Other Libraries -->
 	<git name="hscript-improved" url="https://github.com/CodenameCrew/hscript-improved" ref="custom-classes" />
 	<git name="flxanimate" url="https://github.com/CodenameCrew/cne-flxanimate" />
-	<lib name="hxvlc" url="https://github.com/MobilePorting/hxvlc" skipDeps="true" />
+	<git name="hxvlc" url="https://github.com/MobilePorting/hxvlc" skipDeps="true" />
 	<git name="hxcpp" url="https://github.com/MobilePorting/hxcpp" />
 
 	<!-- Documentation and other features -->
