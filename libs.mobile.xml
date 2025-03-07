@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <libraries>
 	<!-- OpenFL & Lime (Required for Flixel) -->
-	<lib name="openfl" version="9.2.2" />
-	<git name="lime" url="https://github.com/mcagabe19-stuff/lime" />
-
-	<!-- Lime Building Dependencies -->
-	<lib name="hxp" version="1.3.0" />
-	<lib name="format" version="3.6.0" />
+	<lib name="openfl" url="https://github.com/MobilePorting/openfl" ref="9.2.2" />
+	<git name="lime" url="https://github.com/MobilePorting/lime" />
 
 	<!-- Flixel -->
 	<git name="flixel" url="https://github.com/CodenameCrew/cne-flixel" />
@@ -15,15 +11,13 @@
 	<!-- Other Libraries -->
 	<git name="hscript-improved" url="https://github.com/CodenameCrew/hscript-improved" ref="custom-classes" />
 	<git name="flxanimate" url="https://github.com/CodenameCrew/cne-flxanimate" />
-	<lib name="hxvlc" version="1.9.3" skipDeps="true" />
+	<lib name="hxvlc" url="https://github.com/MobilePorting/hxvlc" skipDeps="true" />
+	<git name="hxcpp" url="https://github.com/MobilePorting/hxcpp" />
 
 	<!-- Documentation and other features -->
 	<git name="away3d" url="https://github.com/CodenameCrew/away3d" />
 	<!-- <lib name="dox" /> -->
+	<lib name="format" />
 	<lib name="markdown" />
-
-	<!-- Android Specific -->
-	<git name="extension-androidtools" url="https://github.com/MAJigsaw77/extension-androidtools" ref="main" skipDeps="true" />
-
-	<git name="hxcpp" url="https://github.com/mcagabe19-stuff/hxcpp" />
+	<lib name="nape-haxe4" />
 </libraries>

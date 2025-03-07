@@ -1,11 +1,10 @@
-
-name: Mac OS Build
+name: iOS Build
 on:
-  # push:
+  push:
   workflow_dispatch:
 jobs:
   build:
-    name: Mac OS Build
+    name: iOS Build
     permissions: write-all
     runs-on: macos-13
     steps:
@@ -19,31 +18,17 @@ jobs:
         uses: actions/cache@v3
         with:
           # not caching the bin folder to prevent asset duplication and stuff like that
-          key: cache-build-mac
+          key: cache-build-ios
           path: |
             .haxelib/
-            export/release/macos/haxe/
-            export/release/macos/obj/
+            export/release/ios/CodenameEngine/haxe/
           restore-keys: |
-            cache-build-mac
+            cache-build-ios
       - name: Installing/Updating libraries
         run: |
-          haxe -cp commandline -D analyzer-optimize --run Main setup -s
+          haxe -cp commandline -D analyzer-optimize --run Main setup -s --lib=./libs.mobile.xml
       - name: Building the game
-        run: |
-          haxelib run lime build mac
-      - name: Tar files
-        run: tar -zcvf CodenameEngine.tar.gz -C export/release/macos/bin .
-      - name: Uploading artifact (entire build)
-        uses: actions/upload-artifact@v4
-        with:
-          name: Codename Engine
-          path: CodenameEngine.tar.gz
-      # - name: Uploading artifact (executable)
-      #   uses: actions/upload-artifact@v4
-      #   with:
-      #     name: Update-Mac
-      #     path: export/release/macos/bin/CodenameEngine
+        run: haxelib run lime build ios -nosign
       - name: Clearing already existing cache
         uses: actions/github-script@v6
         with:
@@ -53,7 +38,7 @@ jobs:
               repo: context.repo.repo,
             })
             for (const cache of caches.data.actions_caches) {
-              if (cache.key == "cache-build-mac") {
+              if (cache.key == "cache-build-ios") {
                 console.log('Clearing ' + cache.key + '...')
                 await github.rest.actions.deleteActionsCacheById({
                   owner: context.repo.owner,
@@ -63,14 +48,24 @@ jobs:
                 console.log("Cache cleared.")
               }
             }
+      - name: Making ipa file
+        run: |
+          cd export/*/ios/build/*-iphoneos
+          mkdir Payload
+          mv *.app Payload
+          zip -r CodenameEngine.ipa Payload
+      - name: Uploading artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Codename Engine
+          path: export/release/ios/build/Release-iphoneos/*.ipa
       - name: Uploading new cache
         uses: actions/cache@v3
         with:
           # caching again since for some reason it doesnt work with the first post cache shit
-          key: cache-build-mac
+          key: cache-build-ios
           path: |
             .haxelib/
-            export/release/macos/haxe/
-            export/release/macos/obj/
+            export/release/ios/CodenameEngine/haxe
           restore-keys: |
-            cache-build-mac
+            cache-build-ios

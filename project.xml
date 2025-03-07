@@ -65,7 +65,7 @@
 	</section>
 
 	<assets path='mods' rename='mods' embed='false'/>
-	<assets path='art/readme.txt' rename='do NOT readme.txt' />
+	<assets path='art/readme.txt' rename='do NOT readme.txt' unless="mobile" />
 
 	<!-- OpenAL config -->
 	<section if="desktop">
@@ -194,8 +194,6 @@
 	<haxelib name="hscript-improved" />
 	<haxelib name="hxdiscord_rpc" if="DISCORD_RPC"/>
 	<haxelib name="markdown" />
-
-	<haxelib name="extension-androidtools" if="android" />
 
 	<!-- _________________________________ Additional stuff _______________________________ -->
 
