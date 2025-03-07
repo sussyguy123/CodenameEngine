@@ -432,7 +432,7 @@ class NativeAudioSource
 				timer.stop();
 			}
 
-			var timeRemaining = (getLength() - value) / getPitch();
+			var timeRemaining = Std.int((getLength() - value) / getPitch());
 
 			if (timeRemaining > 0)
 			{
@@ -491,7 +491,7 @@ class NativeAudioSource
 				timer.stop();
 			}
 
-			var timeRemaining = (value - getCurrentTime()) / getPitch();
+			var timeRemaining = Std.int((value - getCurrentTime()) / getPitch());
 
 			if (timeRemaining > 0)
 			{
@@ -534,7 +534,7 @@ class NativeAudioSource
 				timer.stop();
 			}
 
-			var timeRemaining = (getLength() - getCurrentTime()) / value;
+			var timeRemaining = Std.int((getLength() - getCurrentTime()) / value);
 
 			if (timeRemaining > 0)
 			{
