@@ -32,7 +32,7 @@ jobs:
       - name: Download Android Build
         uses: actions/download-artifact@main
         with:
-           name: androidBuild
+           name: "Codename Engine Android"
            path: /home/runner
 
       - name: Move Android File
@@ -41,7 +41,7 @@ jobs:
       - name: Download iOS Build
         uses: actions/download-artifact@main
         with:
-           name: iOSBuild
+           name: "Codename Engine IOS"
            path: ${{ github.workspace }}
 
       - name: Zip iOS Build For Release
