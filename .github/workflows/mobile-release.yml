@@ -1,4 +1,4 @@
-name: Build and Push
+name: Mobile + Release
 on: workflow_dispatch
 
 permissions:
