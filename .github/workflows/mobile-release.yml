@@ -18,14 +18,12 @@ jobs:
           echo "::set-output name=COMMIT_HASH::$commit_hash"
 
   android:
-    needs: get-commit-hash
     uses: ./.github/workflows/android.yml
   ios:
-    needs: get-commit-hash
     uses: ./.github/workflows/ios.yml
 
   Releaser:
-    needs: [android, ios]
+    needs: [android, ios, get-commit-hash]
     runs-on: ubuntu-latest
     permissions: write-all
     steps:
