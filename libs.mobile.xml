@@ -11,7 +11,7 @@
 	<!-- Other Libraries -->
 	<git name="hscript-improved" url="https://github.com/CodenameCrew/hscript-improved" ref="custom-classes" />
 	<git name="flxanimate" url="https://github.com/CodenameCrew/cne-flxanimate" />
-	<git name="hxvlc" url="https://github.com/sussyguy123/hxvlc" skipDeps="true" />
+	<git name="hxvlc" url="https://github.com/MobilePorting/hxvlc" skipDeps="true" />
 	<git name="hxcpp" url="https://github.com/MobilePorting/hxcpp" />
 
 	<!-- Documentation and other features -->
